@@ -5,9 +5,6 @@ import com.webtech.firstJobApp.job.JobRepository;
 import com.webtech.firstJobApp.job.JobService;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,6 +50,7 @@ public class JobServiceImpl implements JobService {
             jobToUpdate.setMinSalary(job.getMinSalary());
             jobToUpdate.setMaxSalary(job.getMaxSalary());
             jobToUpdate.setLocation(job.getLocation());
+            jobRepository.save(jobToUpdate);
             return  true;
         }
         return false;
