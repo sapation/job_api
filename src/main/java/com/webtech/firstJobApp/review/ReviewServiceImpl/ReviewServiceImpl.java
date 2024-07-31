@@ -15,7 +15,8 @@ public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
     private final CompanyService companyService;
 
-    public ReviewServiceImpl(ReviewRepository reviewRepository, CompanyService companyService) {
+    public ReviewServiceImpl(ReviewRepository reviewRepository, CompanyService companyService)
+    {
         this.reviewRepository = reviewRepository;
         this.companyService = companyService;
     }
@@ -26,7 +27,8 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Review getReviewById(Long companyId, Long reviewId) {
+    public Review getReviewById(Long companyId, Long reviewId)
+    {
         List<Review> reviews = reviewRepository.findByCompanyId(companyId);
         return reviews.stream()
                 .filter(review -> review.getId().equals(reviewId))
@@ -35,7 +37,8 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public boolean createReview(Long companyId, Review review) {
+    public boolean createReview(Long companyId, Review review)
+    {
         Company company = companyService.getCompanyById(companyId);
         if (company != null) {
             review.setCompany(company);
@@ -47,8 +50,10 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public boolean updateReview(Long companyId, Long reviewId, Review review) {
-        if (companyService.getCompanyById(companyId) != null) {
+    public boolean updateReview(Long companyId, Long reviewId, Review review)
+    {
+        if (companyService.getCompanyById(companyId) != null)
+        {
             review.setCompany(companyService.getCompanyById(companyId));
             review.setId(reviewId);
             reviewRepository.save(review);
@@ -58,8 +63,10 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public boolean deleteReview(Long companyId, Long reviewId) {
-        if (companyService.getCompanyById(companyId) != null && reviewRepository.existsById(reviewId)) {
+    public boolean deleteReview(Long companyId, Long reviewId)
+    {
+        if (companyService.getCompanyById(companyId) != null && reviewRepository.existsById(reviewId))
+        {
             Review review = reviewRepository.findById(reviewId).orElse(null);
             Company company = review.getCompany();
             company.getReviews().remove(review);
